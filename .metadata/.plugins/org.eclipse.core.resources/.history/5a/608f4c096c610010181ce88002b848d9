@@ -1,0 +1,56 @@
+package com.user.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.user.service.exceptions.ResourceNotFoundException;
+import com.user.service.modal.User;
+import com.user.service.repositories.UserRepo;
+import com.user.services.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	public UserRepo userRepo;
+
+	@Override
+	public User registerNewUser(User user) {
+		User userSave = this.userRepo.save(user);
+		return userSave;
+	}
+
+	@Override
+	public void deleteUserById(String userId) {
+		User user = userRepo.findByUserId(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User", "User Id", userId));
+		userRepo.delete(user);
+	}
+
+	@Override
+	public User updateUser(User userDto, String userId) {
+		User existingUser = userRepo.findByUserId(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User", "User Id", userId));
+
+		existingUser.setFullName(userDto.getFullName());
+		existingUser.setEmail(userDto.getEmail());
+		existingUser.setMobile(userDto.getMobile());
+		existingUser.setAbout(userDto.getAbout());
+
+		return userRepo.save(existingUser);
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userRepo.findAll();
+	}
+
+	@Override
+	public User getUserById(String userId) {
+		return userRepo.findByUserId(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User", "User Id", userId));
+	}
+
+}

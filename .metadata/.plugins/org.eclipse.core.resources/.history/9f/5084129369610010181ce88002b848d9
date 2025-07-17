@@ -1,0 +1,5 @@
+package com.user.service.modal;
+
+public class User {
+
+}

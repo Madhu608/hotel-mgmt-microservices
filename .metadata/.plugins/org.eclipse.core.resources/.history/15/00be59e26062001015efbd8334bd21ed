@@ -1,0 +1,5 @@
+package com.hotel.service.modal;
+
+public class HotelStaff {
+
+}

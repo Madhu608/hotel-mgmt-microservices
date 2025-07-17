@@ -1,0 +1,5 @@
+package com.rating.service.modal;
+
+public class Rating {
+
+}

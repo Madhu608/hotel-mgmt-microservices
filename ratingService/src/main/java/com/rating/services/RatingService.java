@@ -1,0 +1,18 @@
+package com.rating.services;
+
+import java.util.List;
+
+import com.rating.service.modal.Rating;
+
+public interface RatingService {
+	
+    Rating addRatingToHotel(Rating rating);
+
+    List<Rating> getAllRatings();
+
+    List<Rating> getRatingsByUserId(String userId);
+
+    List<Rating> getRatingsByHotelId(String hotelId);
+
+	
+}

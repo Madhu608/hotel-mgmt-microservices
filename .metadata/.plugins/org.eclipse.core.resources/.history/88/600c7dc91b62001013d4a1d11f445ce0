@@ -1,0 +1,3 @@
+# Disable Eureka client features on the server
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
